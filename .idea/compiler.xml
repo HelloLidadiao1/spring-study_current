@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spring-ioc-03" />
+        <module name="spring-ioc-02" />
+        <module name="spring-ioc-01" />
+        <module name="spring-ioc-07" />
+        <module name="spring-ioc-06" />
+        <module name="spring-ioc-05" />
+        <module name="spring-ioc-04" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

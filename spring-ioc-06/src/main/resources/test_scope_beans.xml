@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--默认为：singleton-->
+    <bean class="com.demo.pojo.UserScope" name="defaultScopeUser1"></bean>
+    <bean class="com.demo.pojo.UserScope" name="defaultScopeUser2" scope="singleton"></bean>
+
+    <!--原型模式：prototype-->
+    <bean class="com.demo.pojo.UserScope" name="prototypeScopeUser" scope="prototype"></bean>
+
+    <!--web环境下的：request，session，application【此demo中暂时没有此值】等-->
+    <bean class="com.demo.pojo.UserScope" name="requestScopeUser" scope="request"></bean>
+    <bean class="com.demo.pojo.UserScope" name="sessionScopeUser" scope="session"></bean>
+</beans>

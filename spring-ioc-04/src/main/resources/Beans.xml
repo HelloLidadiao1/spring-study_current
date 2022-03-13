@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--1：import标签，导入整合其余的配置文件-->
+    <!--注意：若被import的xml中有定义重复id的bean会被整合，后面的bean如果和前面的bean的id重名则会覆盖前面的-->
+    <bean id="user" class="demo.pojo.User">
+        <property name="uName" value="李洪杰beans"/>
+        <property name="age" value="24"/>
+    </bean>
+    <!--2：alias给bean起别名,注意：若beans中的bean被别的配置文件中的覆盖了，那么将会报错-->
+    <import resource="Bean1.xml"/>
+    <import resource="Bean2.xml"/>
+    <!--alias标签不支持该写法-->
+    <!--<alias name="user" alias="userAlias,u1;u2 u3"/>-->
+    <alias name="user" alias="userAlias"/>
+    <!-- 注意：同一个xml文件中定义的bean的id不可以重复，代表唯一标识-->
+    <!--<bean id="user" class="demo.pojo.User">
+        <property name="classes" value="02班"/>
+    </bean>-->
+
+    <!-- 经测试用name给bean起别名，功能更加强大，且别名之间可以重复，若重复则会被覆盖-->
+    <bean id="userBm" class="demo.pojo.User" name="u1;u2 u3,u4,userAlias">
+        <property name="uName" value="测试别名"/>
+    </bean>
+
+</beans>

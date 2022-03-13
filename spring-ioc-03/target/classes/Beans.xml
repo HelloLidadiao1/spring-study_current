@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user" class="demo.pojo.User">
+        <!--走无参构造实例化对象，并且使用set方法设置值-->
+        <!--<property name="uName" value="李洪杰"/>-->
+        <constructor-arg index="0" value="22"/>
+    </bean>
+
+    <bean id="userUseSet" class="demo.pojo.User">
+        <!--走无参构造实例化对象，并且使用set方法设置值-->
+        <property name="uName" value="李洪杰走set方法"/>
+    </bean>
+
+    <!--
+        index：指定参数下标，从0开始
+        type：指定参数类型
+        name：指定参数的名称
+        注意：之所以会出现index，type，name这三种不同的参数定位方式，是因为构造方法可能被重载，仅凭单一
+        定位方式并不一定能找到调用者需要的构造方法。
+    -->
+    <bean id="userTemp" class="demo.pojo.User">
+        <!--注意：若不写index，那么默认就是按照顺序constructor-arg标签配置得顺序以及个数去对应-->
+        <!-- 这个配置会报错，因为User中只定义了String,Integer方法，
+        而且因为标签处只配置了两个constructor-arg,所以只会找参数个数为2得构造方法-->
+       <!-- <constructor-arg value="123"></constructor-arg>
+        <constructor-arg value="hello"></constructor-arg>-->
+        <!--下面演示index,type,以及name这些参数得作用;假设我要使用得构造方法是String,Integer,String(注意：参数个数，参数名称都相同)-->
+        <constructor-arg index="0" type="java.lang.String" name="uName" value="李洪杰"></constructor-arg>
+        <constructor-arg index="1" type="java.lang.String" name="classes" value="01班"></constructor-arg>
+        <constructor-arg index="2" type="java.lang.Integer" name="age" value="24"></constructor-arg>
+    </bean>
+</beans>
