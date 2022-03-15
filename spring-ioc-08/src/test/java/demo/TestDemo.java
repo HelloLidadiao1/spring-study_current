@@ -24,6 +24,5 @@ public class TestDemo {
         User user2 = context.getBean("user", User.class);
         System.out.println(user1.hashCode());
         System.out.println(user2.hashCode());
-
     }
 }

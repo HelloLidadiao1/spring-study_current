@@ -17,6 +17,7 @@
         <module>spring-ioc-06</module>
         <module>spring-ioc-07</module>
         <module>spring-ioc-08</module>
+        <module>spring-ioc-09</module>
     </modules>
 
     <properties>
