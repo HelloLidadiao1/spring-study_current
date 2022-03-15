@@ -11,7 +11,7 @@ import org.springframework.lang.Nullable;
  */
 public class HumanByField {
     @Autowired(required = false)
-    @Qualifier("catPet")
+    //@Qualifier("catPet")
     private Cat catPet2;
 
     @Autowired(required = false)

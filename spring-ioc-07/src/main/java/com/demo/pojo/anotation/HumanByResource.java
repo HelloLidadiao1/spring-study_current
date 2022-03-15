@@ -20,7 +20,7 @@ public class HumanByResource {
     @Resource
     private Dog dog;
 
-    @Autowired
+    /*@Autowired*/
     private String name;
     private Integer id;
 

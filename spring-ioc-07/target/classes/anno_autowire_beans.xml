@@ -11,7 +11,7 @@
     <!--要想@Autowired自动注入注解生效，需要加上该段配置-->
     <context:annotation-config />
 
-    <bean id="catPet2" class="com.demo.pojo.anotation.Cat"  autowire-candidate="false">
+    <bean id="catPet2" class="com.demo.pojo.anotation.Cat">
         <property name="catName" value="catPet2"></property>
     </bean>
 
