@@ -6,13 +6,13 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--不使用p命名空间和c命名空间-->
     <!--若不指定id和name则在容器中的名字为：com.demo.pojo.User#0-->
-    <bean class="com.demo.pojo.User" name="user">
+    <bean class="com.demo1.pojo.User" name="user">
         <property name="address">
             <ref bean="address"></ref>
         </property>
     </bean>
 
-    <bean class="com.demo.pojo.Address" id="address">
+    <bean class="com.demo1.pojo.Address" id="address">
         <constructor-arg name="addrNo" value="123"></constructor-arg>
         <property name="addName" value=""></property>
     </bean>

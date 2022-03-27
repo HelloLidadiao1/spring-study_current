@@ -7,11 +7,11 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--使用p命名空间和c命名空间-->
     <!--如果直接写p:address="address"，则会把"address"当成一个字符串而不是一个对象-->
-    <bean class="com.demo.pojo.User" name="user" p:uId="123" p:uName="lihongjie" p:address-ref="address"></bean>
+    <bean class="com.demo1.pojo.User" name="user" p:uId="123" p:uName="lihongjie" p:address-ref="address"></bean>
 
     <!--
         c: addrNoTemp（addrNoTemp必须和构造方法对应的参数名称保持一致）
         p: addNameTemp（【setAddNameTemp,大小写有关系，必须按照标准驼峰】这个方法必须要存在，否则会报错）
     -->
-    <bean class="com.demo.pojo.Address" id="address" c:addrNoTemp="456789" p:addNameTemp="远光软件"></bean>
+    <bean class="com.demo1.pojo.Address" id="address" c:addrNoTemp="456789" p:addNameTemp="远光软件"></bean>
 </beans>

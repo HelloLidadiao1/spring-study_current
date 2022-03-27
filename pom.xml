@@ -18,6 +18,11 @@
         <module>spring-ioc-07</module>
         <module>spring-ioc-08</module>
         <module>spring-ioc-09</module>
+        <module>spring-aop-01_proxyModeStudy</module>
+        <module>spring-aop-02</module>
+        <module>spring-unionmybatis-01</module>
+        <module>spring-unionmybatis-02</module>
+        <module>spring-transaction-01</module>
     </modules>
 
     <properties>
@@ -49,6 +54,14 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.1.5.RELEASE</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

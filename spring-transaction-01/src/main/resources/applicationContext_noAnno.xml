@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://mybatis.org/schema/mybatis-spring
+       http://mybatis.org/schema/mybatis-spring.xsd">
+
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!-- Spring声明式事务，方式1，基于xml配置切面实现-->
+
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${mysql.driverClass}"></property>
+        <property name="url" value="${mysql.url}"></property>
+        <property name="username" value="${mysql.username}"></property>
+        <property name="password" value="${mysql.password}"></property>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" autowire="byName">
+        <property name="configLocation" value="classpath:mybatis_config.xml"></property>
+        <property name="mapperLocations" value="classpath:com/lihongjie/demo/mapper/*.xml"></property>
+    </bean>
+
+    <!-- 扫描注册发现映射器 -->
+    <mybatis:scan base-package="com.lihongjie.demo.mapper" factory-ref="sqlSessionFactory"/>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!-- 注册业务层bean -->
+    <bean id="userService" class="com.lihongjie.demo.service.impl.UserServiceImpl">
+        <property name="userMapper" ref="userMapper"></property>
+    </bean>
+
+    <!--xml中配置声明式事务，可以理解为一个通知（该通知对事务进行增强处理）-->
+    <!-- <tx:method/> 中的属性设置
+        name：事务匹配的方法名称（可以使用*通配符）
+
+        isolation：事务并发访问相同数据时的隔离级别
+
+        propagation：方法相互调用时，事务的传播机制，比如methodA（有事务）调用methodB（无事务）方法间的事务是怎么影响的
+        默认值：REQUIRED【当方法调用时，如果不存在当前事务，那么就创建事务；如果之前的方法已经存在事务了，那么就沿用之前的事务】
+
+        timeout：事务超时时间（分钟），默认值为-1（无超时时间），仅适用于传播特性为：REQUIRED or REQUIRES_NEW，超时会引发异常
+
+        read-only：是否开启只读事务，默认为false。【只读事务相对于读写事务】，仅适用于：REQUIRED or REQUIRES_NEW
+
+        rollback-for：指定哪些异常会发生回滚，有多个可用,号分隔 如：com.foo.MyBusinessException,ServletException
+
+        no-rollback-for：指定哪些异常不触发回滚。如：com.foo.MyBusinessException,ServletException
+        Any RuntimeException triggers rollback, and any checked Exception does not
+        默认情况下：任何的运行时异常都会触发回滚，并且任何已经被检查的异常都不会触发回滚
+
+    -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="sel*" read-only="true"/>
+            <tx:method name="del*" />
+            <tx:method name="ins*" />
+            <!-- 指定哪些异常需要回滚，但是不影响默认设置（运行时异常默认回滚，已检查异常不会回滚） -->
+            <tx:method name="opeUser" rollback-for="MyException" propagation="REQUIRED"/>
+            <!--<tx:method name="propagationTestA" propagation="NEVER"/>-->
+            <!-- 注意：同一个类中加了事务的方法之间相互调用，事务会失效   假设A-》调用B那么B的事务会失效 -->
+            <tx:method name="propagationTestA" propagation="NOT_SUPPORTED"/>
+            <!--<tx:method name="propagationTestB" propagation="REQUIRES_NEW" rollback-for="MyException"/>-->
+            <tx:method name="propagationTestB" propagation="MANDATORY"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 注意：声明式事务是依赖于AOP的，所以需要把aspectweaver包也导入进来 -->
+    <!-- 注意：在这里，事务切入一组操作才有意义，如果切入单个mapper（dao）中的方法（insert，或者delete），
+        失败了也只是回滚到执行insert或者delete单个方法之前的状态，并不会回滚到执行一组业务之前，因为切入的是单个mapper方法（且对于单个方法，
+        sqlSession会自己提交回滚事务，可查看mybatis日志）。【这里的单个mapper方法，因为用的是mybatis框架，所以一个mapper方法通常只包含一个sql操作
+        例如：select，insert....】
+        所以在案例中应该绑定事务的是进行了一组业务操作的service中的opeUser【调用了userMapper中的insert、delete、select】方法。
+    -->
+    <aop:config proxy-target-class="true">
+        <!--<aop:pointcut id="userTransactionPointCut" expression="target(com.lihongjie.demo.mapper.UserMapper)"/>-->
+        <!-- target 和 this表达式都会切入实现了com.lihongjie.demo.service.UserService的目标类的所有方法 -->
+        <!--<aop:pointcut id="userTransactionPointCut" expression="this(com.lihongjie.demo.service.UserService)"/>-->
+        <aop:pointcut id="userTransactionPointCut" expression="execution(* com.lihongjie.demo.service.impl.UserServiceImpl.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="userTransactionPointCut"/>
+    </aop:config>
+</beans>

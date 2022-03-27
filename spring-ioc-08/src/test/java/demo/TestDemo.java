@@ -1,7 +1,7 @@
 package demo;
 
-import com.lihongjie.demo.controller.UserController;
-import com.lihongjie.demo.pojo.User;
+import com.lihongjie.demo3.controller.UserController;
+import com.lihongjie.demo3.pojo.User;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

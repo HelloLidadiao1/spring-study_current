@@ -1,0 +1,2 @@
+1、作为Spring整合mybatis，本demo的目的主要是为了回顾mybatis
+

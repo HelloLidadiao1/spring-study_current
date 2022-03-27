@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 目标对象 -->
+    <bean name="userDaoImpl2" class="com.demo2.dao.impl.UserDaoImpl2"/>
+
+    <!-- 通知方法所在类 -->
+    <bean id="myAdvice" class="com.demo2.aop.MySpringApiAdvice"/>
+
+    <!-- 方式二：基于Spring提供的API来使用SpringAOP，参见包com.demo2 -->
+    <!-- AOP配置 -->
+    <aop:config>
+        <!-- 定义切点_com.demo.dao.impl.UserDaoImpl下所有的方法（不限制参数和返回值）-->
+        <!--<aop:pointcut id="myPoint" expression="execution(* com.demo2..UserDaoImpl2.*(..))"/>-->
+        <!--//匹配名称中带有后缀Service的Bean-->
+        <aop:pointcut id="myPoint" expression="bean(*DaoImpl2)"/>
+        <aop:advisor advice-ref="myAdvice" pointcut-ref="myPoint"/>
+    </aop:config>
+
+
+</beans>

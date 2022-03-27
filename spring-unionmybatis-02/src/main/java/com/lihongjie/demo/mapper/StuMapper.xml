@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lihongjie.demo.mapper.StuMapper">
+
+    <insert id="insertStus">
+        insert into student values
+        <foreach collection="list" item="stu" separator=",">
+            (#{stu.sid},#{stu.sname},#{stu.tid})
+        </foreach>
+    </insert>
+
+</mapper>

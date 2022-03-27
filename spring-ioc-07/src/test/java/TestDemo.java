@@ -1,8 +1,8 @@
-import com.demo.pojo.anotation.HumanByConstructor;
-import com.demo.pojo.anotation.HumanByField;
-import com.demo.pojo.anotation.HumanByResource;
-import com.demo.pojo.anotation.HumanBySet;
-import com.demo.pojo.noanotation.Human;
+import com.demo1.pojo.anotation.HumanByConstructor;
+import com.demo1.pojo.anotation.HumanByField;
+import com.demo1.pojo.anotation.HumanByResource;
+import com.demo1.pojo.anotation.HumanBySet;
+import com.demo1.pojo.noanotation.Human;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

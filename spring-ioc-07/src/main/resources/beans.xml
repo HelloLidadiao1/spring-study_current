@@ -5,10 +5,10 @@
        xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="cat" class="com.demo.pojo.noanotation.Cat"></bean>
-    <bean id="dog" class="com.demo.pojo.noanotation.Dog"></bean>
+    <bean id="cat" class="com.demo1.pojo.noanotation.Cat"></bean>
+    <bean id="dog" class="com.demo1.pojo.noanotation.Dog"></bean>
     <!--如果不使用自动注入-->
-    <bean id="human" class="com.demo.pojo.noanotation.Human">
+    <bean id="human" class="com.demo1.pojo.noanotation.Human">
         <property name="cat" ref="cat"></property>
         <property name="dog">
             <ref bean="dog"></ref>

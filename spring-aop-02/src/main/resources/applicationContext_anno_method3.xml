@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 目标对象 -->
+    <!--<bean name="userDao" class="com.demo2.dao.impl.UserDaoImpl"/>-->
+
+    <!-- 方式三：使用@Aspect注解来使用SpringAOP, 参见包com.demo3-->
+    <context:component-scan base-package="com.demo3"/>
+    <!-- 启动@aspectj的自动代理支持 proxy-target-class="true"【强制使用cglib】   proxy-target-class="false"【默认，
+    有接口则使用JDK动态代理，没接口就使用cglib动态代理】-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+
+</beans>

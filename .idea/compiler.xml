@@ -9,14 +9,23 @@
         <outputRelativeToContentRoot value="true" />
         <module name="spring-ioc-09" />
         <module name="spring-ioc-08" />
+        <module name="spring-transaction-01" />
         <module name="spring-ioc-03" />
         <module name="spring-ioc-02" />
+        <module name="spring-aop-02_basexml" />
         <module name="spring-ioc-01" />
         <module name="spring-ioc-07" />
         <module name="spring-ioc-06" />
         <module name="spring-ioc-05" />
         <module name="spring-ioc-04" />
+        <module name="spring-aop-01_proxyModeStudy" />
+        <module name="spring-unionmybatis-01" />
+        <module name="spring-unionmybatis-02" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="spring-aop-02" target="1.8" />
+      <module name="spring-ioc-10_proxyModeStudy" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

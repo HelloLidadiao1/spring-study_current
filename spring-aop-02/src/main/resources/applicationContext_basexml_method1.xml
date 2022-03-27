@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 目标对象 -->
+    <bean name="userDao" class="com.demo1.dao.impl.UserDaoImpl"/>
+    <!-- 测试：若目标对象没有实现接口 -->
+    <bean name="userDaoNotInterfaceImpl" class="com.demo1.dao.impl.UserDaoNotInterfaceImpl"/>
+
+    <!-- 通知方法所在类 -->
+    <bean id="myAspectXml" class="com.demo1.aop.MyAspectXml"/>
+
+    <!-- 方式一：使用在xml中自定义切面来使用SpringAOP，参见包com.demo1-->
+    <!-- AOP配置 -->
+    <aop:config>
+        <!-- 定义切点_com.demo.dao.impl.UserDaoImpl下所有的方法（不限制参数和返回值）-->
+        <aop:pointcut id="myPoint" expression="execution(* com.demo1.dao.impl.*.*(..))"/>
+
+        <!-- 配置切面 order指定切面的优先级 -->
+        <aop:aspect ref="myAspectXml" order="0">
+            <!--
+                注意：切点表达式中的args(uName, ..)匹配的是切点方法的参数，通过这种指定后对应的Advice处理方法在执行时将接收到与之对应的切入点方法参数的值。
+                而如<aop:after-returning> 标签上的arg-names属性是用于指定在切点表达式中应用的参数名与Advice方法参数是如何对应的，
+                arg-names中指定的参数名必须与切点表达式中的一致，可以与Advice方法中的参数名不一致
+            -->
+            <aop:pointcut id="argPointCut" expression="execution(* com.demo1.dao.impl.*.*(String)) and args(uName, ..)"/>
+            <aop:before method="before" pointcut-ref="argPointCut"></aop:before>
+            <aop:after-returning method="afterReturning" pointcut-ref="argPointCut" returning="returnVal"
+                                 arg-names="returnVal,uName"></aop:after-returning>
+            <aop:around method="around" pointcut-ref="myPoint"></aop:around>
+            <aop:after-throwing method="afterThrowing" pointcut-ref="myPoint" throwing="throwable"></aop:after-throwing>
+            <aop:after method="after" pointcut-ref="myPoint"></aop:after>
+        </aop:aspect>
+
+    </aop:config>
+
+
+</beans>

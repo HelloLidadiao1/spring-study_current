@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--<properties resource="jdbc.properties" />-->
+
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <typeAliases>
+        <package name="com.lihongjie.demo.pojo"/>
+    </typeAliases>
+
+    <!-- spring整合mybatis之后，这部分的配置都由spring来替代了-->
+    <!--<environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${mysql.driver}"/>
+                <property name="url" value="${mysql.url}"/>
+                <property name="username" value="${mysql.username}"/>
+                <property name="password" value="${mysql.password}"/>
+            </dataSource>
+        </environment>
+    </environments>-->
+    <mappers>
+        <!--<mapper class="com.lihongjie.demo.mapper.UserMapper"/>-->
+        <package name="com.lihongjie.demo.mapper" />
+        <package name="com.lihongjie.demo.mapper2" />
+    </mappers>
+</configuration>

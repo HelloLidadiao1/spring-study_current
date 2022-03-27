@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://mybatis.org/schema/mybatis-spring
+       http://mybatis.org/schema/mybatis-spring.xsd">
+    <!-- spring-mybatis第一种整合方式   -->
+    <!-- 引入jdbc配置文件 -->
+   <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!-- 使用Spring-Jdbc提供的数据源 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${mysql.driver}"/>
+        <property name="url" value="${mysql.url}"/>
+        <property name="username" value="${mysql.username}"/>
+        <property name="password" value="${mysql.password}"/>
+    </bean>
+
+    <!-- 注入sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- 扫描mybatis-config.xml核心配置文件 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!-- 扫描*mapper.xml配置文件，当然扫描了mybatis-config.xml之后，这部分还是可以写在mybatis的配置文件中-->
+       <!-- <property name="mapperLocations" value="classpath:com/lihongjie/demo/mapper/*.xml"/>-->
+    </bean>
+
+
+    <!-- 配置数据库层操作bean，mapperInterface无法配置多个，若配置多个会形成覆盖 -->
+    <!--<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.lihongjie.demo.mapper.UserMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>-->
+    <!-- 类似于spring中的<context:component-scan>,用于扫描mybatis映射mapper接口和映射文件，会扫描指定包下的所有接口，
+    扫描到springIOC容器中，如果未指定名称则是类名小写。-->
+    <mybatis:scan base-package="com.lihongjie.demo.mapper"/>
+</beans>

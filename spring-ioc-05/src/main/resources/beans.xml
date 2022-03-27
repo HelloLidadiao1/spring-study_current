@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean class="com.demo.pojo.Student" id="student" name="student">
+    <bean class="com.demo1.pojo.Student" id="student" name="student">
         <property name="name">
             <value>差不多先生</value>
         </property>
@@ -47,7 +47,7 @@
         </property>
     </bean>
 
-    <bean class="com.demo.pojo.Address" id="addressId" name="address">
+    <bean class="com.demo1.pojo.Address" id="addressId" name="address">
         <constructor-arg value="123456"></constructor-arg>
         <property name="addName" value="远光软件1"></property>
     </bean>
@@ -58,7 +58,7 @@
         <property name="addName" value="远光软件2"></property>
     </bean>-->
 
-    <bean class="com.demo.pojo.Hobby" id="hobby">
+    <bean class="com.demo1.pojo.Hobby" id="hobby">
         <property name="hobbyId" value=""></property>
         <property name="hobbyName" value="打篮球"></property>
     </bean>

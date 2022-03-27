@@ -2,7 +2,7 @@ package demo;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import com.demo.pojo.Student;
+import com.demo1.pojo.Student;
 
 /**
  * @author lihongjie

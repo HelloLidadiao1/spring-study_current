@@ -1,8 +1,8 @@
 package demo;
 
-import com.demo.config.AppConfig;
-import com.demo.pojo.Human;
-import com.demo.pojo2.Bird;
+import com.demo1.config.AppConfig;
+import com.demo1.pojo.Human;
+import com.demo1.pojo2.Bird;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

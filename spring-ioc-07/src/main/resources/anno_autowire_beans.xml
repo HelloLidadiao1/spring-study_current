@@ -11,22 +11,22 @@
     <!--要想@Autowired自动注入注解生效，需要加上该段配置-->
     <context:annotation-config />
 
-    <bean id="catPet2" class="com.demo.pojo.anotation.Cat"  autowire-candidate="false">
+    <bean id="catPet2" class="com.demo1.pojo.anotation.Cat" autowire-candidate="false">
         <property name="catName" value="catPet2"></property>
     </bean>
 
-    <bean id="catPet" class="com.demo.pojo.anotation.Cat">
+    <bean id="catPet" class="com.demo1.pojo.anotation.Cat">
         <property name="catName" value="catPet"></property>
     </bean>
 
-    <bean id="dog" class="com.demo.pojo.anotation.Dog"></bean>
+    <bean id="dog" class="com.demo1.pojo.anotation.Dog"></bean>
 
-    <bean id="humanByField" class="com.demo.pojo.anotation.HumanByField"/>
+    <bean id="humanByField" class="com.demo1.pojo.anotation.HumanByField"/>
 
-    <bean id="humanBySet" class="com.demo.pojo.anotation.HumanBySet"/>
+    <bean id="humanBySet" class="com.demo1.pojo.anotation.HumanBySet"/>
 
-    <bean id="humanByConstructor" class="com.demo.pojo.anotation.HumanByConstructor"/>
+    <bean id="humanByConstructor" class="com.demo1.pojo.anotation.HumanByConstructor"/>
     <bean id="name" class="java.lang.String"/>
 
-    <bean id="humanByResource" class="com.demo.pojo.anotation.HumanByResource"/>
+    <bean id="humanByResource" class="com.demo1.pojo.anotation.HumanByResource"/>
 </beans>

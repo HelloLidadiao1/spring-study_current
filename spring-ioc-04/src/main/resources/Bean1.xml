@@ -12,4 +12,5 @@
         <!--走无参构造实例化对象，并且使用set方法设置值-->
         <property name="uName" value="李洪杰走set方法"/>
     </bean>
+
 </beans>

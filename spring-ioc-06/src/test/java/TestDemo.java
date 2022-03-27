@@ -1,11 +1,8 @@
-import com.demo.pojo.User;
-import com.demo.pojo.UserScope;
+import com.demo1.pojo.User;
+import com.demo1.pojo.UserScope;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * @author lihongjie

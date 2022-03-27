@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lihongjie.demo.mapper.UserMapper">
+    <select id="selUser" resultType="user">
+        select * from learnmybatis.user
+    </select>
+
+    <update id="delUser">
+        delete from learnmybatis.user where uid = #{uid}
+    </update>
+
+    <insert id="insUser">
+        insert into learnmybatis.user values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.uid}, #{item.uname}, #{item.email})
+        </foreach>
+    </insert>
+
+</mapper>
